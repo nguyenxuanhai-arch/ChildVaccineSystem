@@ -1,4 +1,4 @@
-package edu.uth.childvaccinesystem.model;
+package edu.uth.childvaccinesystem.models;
 
 import lombok.Getter;
 import lombok.Setter;
