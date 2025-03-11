@@ -1,63 +1,60 @@
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 package edu.uth.childvaccinesystem.models;
 
 
+@Entity
 public class Booking {
-    private int id;
-    private int childId;
-    private int vaccineId;
-    private Date bookingDate;
-    private Date appointmentDate;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long childId;
+    private Long vaccineId;
+    private LocalDateTime appointmentDate;
 
     public Booking() {
     }
 
-    public Booking(int id, int childId, int vaccineId, Date bookingDate, Date appointmentDate) {
-        this.id = id;
+    public Booking(Long childId, Long vaccineId, LocalDateTime appointmentDate) {
         this.childId = childId;
         this.vaccineId = vaccineId;
-        this.bookingDate = bookingDate;
         this.appointmentDate = appointmentDate;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getChildId() {
+    public Long getChildId() {
         return childId;
     }
 
-    public void setChildId(int childId) {
+    public void setChildId(Long childId) {
         this.childId = childId;
     }
 
-    public int getVaccineId() {
+    public Long getVaccineId() {
         return vaccineId;
     }
 
-    public void setVaccineId(int vaccineId) {
+    public void setVaccineId(Long vaccineId) {
         this.vaccineId = vaccineId;
     }
 
-    public Date getBookingDate() {
-        return bookingDate;
-    }
-
-    public void setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate;
-    }
-
-    public Date getAppointmentDate() {
+    public LocalDateTime getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
+    public void setAppointmentDate(LocalDateTime appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 }
