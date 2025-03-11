@@ -1,13 +1,11 @@
+package edu.uth.childvaccinesystem.controllers;
+
 import edu.uth.childvaccinesystem.models.Child;
 import edu.uth.childvaccinesystem.services.ChildService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
-package edu.uth.childvaccinesystem.controllers;
-
-
 
 @RestController
 @RequestMapping("/api/children")

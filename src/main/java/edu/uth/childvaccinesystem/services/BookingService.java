@@ -1,9 +1,11 @@
+package edu.uth.childvaccinesystem.services;
+
+import edu.uth.childvaccinesystem.models.Booking;
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-package edu.uth.childvaccinesystem.services;
-
-
+@Service
 public class BookingService {
 
     private List<Booking> bookings;
@@ -31,5 +33,16 @@ public class BookingService {
 
     public boolean cancelBooking(int id) {
         return bookings.removeIf(booking -> booking.getId() == id);
+    }
+
+    public <Booking> Booking createBooking(Booking booking) {
+        return booking;
+    }
+
+    public Booking updateBooking(Long id, Booking booking) {
+        return booking;
+    }
+
+    public void deleteBooking(Long id) {
     }
 }
