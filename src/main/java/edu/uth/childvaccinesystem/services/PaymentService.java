@@ -1,15 +1,12 @@
+package edu.uth.childvaccinesystem.services;
+
 import edu.uth.childvaccinesystem.models.Payment;
-import edu.uth.childvaccinesystem.repositories.PaymentRepository;
+import edu.uth.childvaccinesystem.reponsitories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-package edu.uth.childvaccinesystem.services;
-
-public class PaymentService {
-    
-}
 @Service
 public class PaymentService {
 
@@ -30,5 +27,13 @@ public class PaymentService {
 
     public void deletePayment(Long id) {
         paymentRepository.deleteById(id);
+    }
+
+    public Payment createPayment(Payment payment) {
+        return payment;
+    }
+
+    public Payment updatePayment(Long id, Payment payment) {
+        return payment;
     }
 }
