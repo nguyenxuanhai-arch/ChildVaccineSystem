@@ -1,20 +1,20 @@
+package edu.uth.childvaccinesystem.services;
+
 import edu.uth.childvaccinesystem.models.Vaccine;
-import edu.uth.childvaccinesystem.repositories.VaccineRepository;
+import edu.uth.childvaccinesystem.reponsitories.VaccineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-package edu.uth.childvaccinesystem.services;
 
+@Service
 public class VaccineService {
-    @Service
-    public class VaccineService {
 
-        @Autowired
-        private VaccineRepository vaccineRepository;
+    @Autowired
+    private VaccineRepository vaccineRepository;
 
-        public List<Vaccine> getAllVaccines() {
+    public List<Vaccine> getAllVaccines() {
             return vaccineRepository.findAll();
         }
 
@@ -29,5 +29,13 @@ public class VaccineService {
         public void deleteVaccine(Long id) {
             vaccineRepository.deleteById(id);
         }
+
+    public Vaccine createVaccine(Vaccine vaccine) {
+        return vaccine;
+    }
+
+    public Vaccine updateVaccine(Long id, Vaccine vaccine) {
+        return vaccine;
     }
 }
+

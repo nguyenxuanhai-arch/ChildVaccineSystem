@@ -1,9 +1,8 @@
-import edu.uth.childvaccinesystem.entities.Vaccine;
+package edu.uth.childvaccinesystem.reponsitories;
+
+import edu.uth.childvaccinesystem.models.Vaccine;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-package edu.uth.childvaccinesystem.repositories;
-
 
 @Repository
 public interface VaccineRepository extends JpaRepository<Vaccine, Long> {

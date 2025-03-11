@@ -1,12 +1,11 @@
+package edu.uth.childvaccinesystem.controllers;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import edu.uth.childvaccinesystem.models.Vaccine;
 import edu.uth.childvaccinesystem.services.VaccineService;
 import java.util.List;
-
-package edu.uth.childvaccinesystem.controllers;
-
-
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/vaccines")
@@ -21,7 +20,7 @@ public class VaccineController {
     }
 
     @GetMapping("/{id}")
-    public Vaccine getVaccineById(@PathVariable Long id) {
+    public Optional<Vaccine> getVaccineById(@PathVariable Long id) {
         return vaccineService.getVaccineById(id);
     }
 

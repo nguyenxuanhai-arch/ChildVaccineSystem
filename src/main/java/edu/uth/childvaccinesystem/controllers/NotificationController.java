@@ -1,12 +1,10 @@
+package edu.uth.childvaccinesystem.controllers;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import edu.uth.childvaccinesystem.services.NotificationService;
 import edu.uth.childvaccinesystem.models.Notification;
 import java.util.List;
-
-package edu.uth.childvaccinesystem.controllers;
-
-
 
 @RestController
 @RequestMapping("/notifications")

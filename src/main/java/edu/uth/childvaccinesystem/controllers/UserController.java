@@ -1,12 +1,11 @@
+package edu.uth.childvaccinesystem.controllers;
+
 import edu.uth.childvaccinesystem.models.User;
 import edu.uth.childvaccinesystem.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
-package edu.uth.childvaccinesystem.controllers;
-
-
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -21,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
+    public Optional<User> getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 

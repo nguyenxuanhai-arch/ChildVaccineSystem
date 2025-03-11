@@ -1,12 +1,9 @@
+package edu.uth.childvaccinesystem.controllers;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import edu.uth.childvaccinesystem.models.Booking;
 import edu.uth.childvaccinesystem.services.BookingService;
-import java.util.List;
-
-package edu.uth.childvaccinesystem.controllers;
-
-
 
 @RestController
 @RequestMapping("/bookings")
@@ -15,18 +12,13 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    @GetMapping
-    public List<Booking> getAllBookings() {
-        return bookingService.getAllBookings();
-    }
-
     @GetMapping("/{id}")
-    public Booking getBookingById(@PathVariable Long id) {
-        return bookingService.getBookingById(id);
+    public <Booking> Booking getBookingById(@PathVariable Long id) {
+        return (Booking) bookingService.getBookingById(Math.toIntExact(id));
     }
 
     @PostMapping
-    public Booking createBooking(@RequestBody Booking booking) {
+    public <Booking> Booking createBooking(@RequestBody Booking booking) {
         return bookingService.createBooking(booking);
     }
 

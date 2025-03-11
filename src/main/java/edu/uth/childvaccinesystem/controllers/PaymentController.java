@@ -1,10 +1,11 @@
+package edu.uth.childvaccinesystem.controllers;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import edu.uth.childvaccinesystem.services.PaymentService;
 import edu.uth.childvaccinesystem.models.Payment;
 
-package edu.uth.childvaccinesystem.controllers;
-
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/payments")
@@ -19,7 +20,7 @@ public class PaymentController {
     }
 
     @GetMapping("/{id}")
-    public Payment getPaymentById(@PathVariable Long id) {
+    public Optional<Payment> getPaymentById(@PathVariable Long id) {
         return paymentService.getPaymentById(id);
     }
 
