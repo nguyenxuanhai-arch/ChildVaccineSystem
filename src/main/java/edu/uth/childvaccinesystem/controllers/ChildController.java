@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/children")
@@ -20,13 +21,8 @@ public class ChildController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Child> getChildById(@PathVariable Long id) {
-        Child child = childService.getChildById(id);
-        if (child != null) {
-            return ResponseEntity.ok(child);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public Optional<Child> getChildById(@PathVariable Long id) {
+        return childService.getChildById(id);
     }
 
     @PostMapping
@@ -45,11 +41,7 @@ public class ChildController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteChild(@PathVariable Long id) {
-        if (childService.deleteChild(id)) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public void deleteChild(@PathVariable Long id) {
+        childService.deleteChild(id);
     }
 }
