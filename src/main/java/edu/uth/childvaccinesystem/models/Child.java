@@ -4,10 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 public class Child {
 
+    // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,28 +29,25 @@ public class Child {
         this.dateOfBirth = dateOfBirth;
     }
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
+    public String getUsername() {
+        return "";
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getEmail() {
+        return "";
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return "";
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public void setEmail(String email) {
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setPassword(String password) {
+
     }
 }

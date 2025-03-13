@@ -1,7 +1,8 @@
 package edu.uth.childvaccinesystem.services;
 
 import edu.uth.childvaccinesystem.models.User;
-import edu.uth.childvaccinesystem.reponsitories.UserReponsitory;
+import edu.uth.childvaccinesystem.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,38 +11,39 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UserReponsitory userReponsitory;
+    private final UserRepository userRepository;
 
-    public UserService(UserReponsitory userRepository) {
-        this.userReponsitory = userRepository;
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public List<User> getAllUsers() {
-        return userReponsitory.findAll();
+        return userRepository.findAll();
     }
 
     public Optional<User> getUserById(Long id) {
-        return userReponsitory.findById(id);
+        return userRepository.findById(id);
     }
 
     public User createUser(User user) {
-        return userReponsitory.save(user);
+        return userRepository.save(user);
     }
 
-    public User updateUser(Long id, User userDetails) {
-        Optional<User> userOptional = userReponsitory.findById(id);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
+    public Optional<User> updateUser(Long id, User userDetails) {
+        return userRepository.findById(id).map(user -> {
             user.setUsername(userDetails.getUsername());
             user.setEmail(userDetails.getEmail());
             user.setPassword(userDetails.getPassword());
-            return userReponsitory.save(user);
-        } else {
-            throw new RuntimeException("User not found with id " + id);
-        }
+            return userRepository.save(user);
+        });
     }
 
-    public void deleteUser(Long id) {
-        userReponsitory.deleteById(id);
+    public boolean deleteUser(Long id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
