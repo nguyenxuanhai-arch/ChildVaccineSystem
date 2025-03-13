@@ -6,16 +6,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-
+@Setter
+@Getter
 @Entity
 public class Notification {
 
-    @Setter
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Getter
+
     private String message;
     private String recipient;
     private boolean isRead;
@@ -28,7 +27,7 @@ public class Notification {
         this.recipient = recipient;
         this.isRead = isRead;
     }
-    
+
     public boolean isRead() {
         return isRead;
     }
