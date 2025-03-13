@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${title}">Child Vaccine System</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<header>
+  <h1>Child Vaccine System</h1>
+  <nav>
+    <a th:href="@{/}">Trang chủ</a>
+    <a th:href="@{/vaccines}">Danh sách vaccine</a>
+    <a th:href="@{/booking}">Đặt lịch</a>
+    <a th:href="@{/profile}">Hồ sơ</a>
+    <a th:href="@{/feedback}">Phản hồi</a>
+    <a th:href="@{/dashboard}">Bảng điều khiển</a>
+    <a th:href="@{/login}">Đăng nhập</a>
+    <a th:href="@{/about}">Giới thiệu</a>
+  </nav>
+</header>
+<main>
+  <div th:replace="~{::content}"></div>
+</main>
+<footer>
+  <p>&copy; 2025 Child Vaccine System</p>
+</footer>
+</body>
+</html>
