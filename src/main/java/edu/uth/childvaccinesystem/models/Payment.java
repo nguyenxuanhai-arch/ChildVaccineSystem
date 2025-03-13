@@ -4,67 +4,35 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
 
+@Setter
+@Getter
 @Entity
 public class Payment {
 
+    // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long vaccineId;
     private String payerName;
     private double amount;
     private String paymentMethod;
-    private String paymentDate;
+    private LocalDate paymentDate; // Sử dụng LocalDate thay vì String
 
     // Constructors
     public Payment() {}
 
-    public Payment(String payerName, double amount, String paymentMethod, String paymentDate) {
+    public Payment(Long vaccineId, String payerName, double amount, String paymentMethod, LocalDate paymentDate) {
+        this.vaccineId = vaccineId;
         this.payerName = payerName;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
         this.paymentDate = paymentDate;
     }
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPayerName() {
-        return payerName;
-    }
-
-    public void setPayerName(String payerName) {
-        this.payerName = payerName;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public String getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(String paymentDate) {
-        this.paymentDate = paymentDate;
-    }
 }
