@@ -5,8 +5,6 @@ import edu.uth.childvaccinesystem.repositories.VaccineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
-
 
 @Service
 public class VaccineService {
@@ -14,28 +12,40 @@ public class VaccineService {
     @Autowired
     private VaccineRepository vaccineRepository;
 
-    public List<Vaccine> getAllVaccines() {
-            return vaccineRepository.findAll();
-        }
-
-        public Optional<Vaccine> getVaccineById(Long id) {
-            return vaccineRepository.findById(id);
-        }
-
-        public Vaccine saveVaccine(Vaccine vaccine) {
-            return vaccineRepository.save(vaccine);
-        }
-
-        public void deleteVaccine(Long id) {
-            vaccineRepository.deleteById(id);
-        }
-
-    public Vaccine createVaccine(Vaccine vaccine) {
-        return vaccine;
+    // Create (Thêm vaccine)
+    public long createVaccine(Vaccine vaccine) {
+        return vaccineRepository.save(vaccine).getId();
     }
 
-    public Vaccine updateVaccine(Long id, Vaccine vaccine) {
-        return vaccine;
+    // Read (Lấy thông tin vaccine theo ID)
+    public Vaccine getVaccineById(Long id) {
+        return vaccineRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vaccine not found"));
+    }
+
+    // Read (Lấy tất cả vaccine)
+    public List<Vaccine> getAllVaccines() {
+        return vaccineRepository.findAll();
+    }
+
+    // Update (Cập nhật vaccine)
+    public long updateVaccine(Long id, Vaccine vaccineDetails) {
+        Vaccine vaccine = vaccineRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vaccine not found"));
+
+        vaccine.setName(vaccineDetails.getName());
+        vaccine.setManufacturer(vaccineDetails.getManufacturer());
+        vaccine.setLotNumber(vaccineDetails.getLotNumber());
+        vaccine.setExpirationDate(vaccineDetails.getExpirationDate());
+
+        return vaccineRepository.save(vaccine).getId();
+    }
+
+    // Delete (Xóa vaccine)
+    public long deleteVaccine(Long id) {
+        Vaccine vaccine = vaccineRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vaccine not found"));
+        vaccineRepository.delete(vaccine);
+        return id;
     }
 }
-
