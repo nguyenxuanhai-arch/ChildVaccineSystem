@@ -4,23 +4,32 @@ import edu.uth.childvaccinesystem.models.User;
 import edu.uth.childvaccinesystem.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional<User> findByUsername(String username) {
-        return this.userRepository.findByUsername(username);
+    public long CreateUser(User user) {
+        return this.userRepository.save(user).getId();
     }
 
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public long UpdateUser(Long id, User userDetails) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setUsername(userDetails.getUsername());
+        user.setPassword(userDetails.getPassword());
+
+        return userRepository.save(user).getId();
     }
 
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    public long DeleteUser(User user) {
+        return this.userRepository.save(user).getId();
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

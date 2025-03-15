@@ -26,4 +26,43 @@ public class Vaccine {
         this.expirationDate = expirationDate;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public String getLotNumber() {
+        return lotNumber;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public void setLotNumber(String lotNumber) {
+        this.lotNumber = lotNumber;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
 }
