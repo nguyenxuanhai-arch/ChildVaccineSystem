@@ -32,4 +32,10 @@ public class UserController {
     public long deleteUser(@RequestBody User user) {
         return userService.DeleteUser(user);
     }
+
+    @PostMapping("/register")
+    public String registerUser(@RequestParam String username, @RequestParam String password, @RequestParam String role) {
+        userService.registerUser(username, password, role);
+        return "redirect:/login";
+    }
 }

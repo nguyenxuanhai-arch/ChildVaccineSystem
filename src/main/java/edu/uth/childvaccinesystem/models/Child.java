@@ -19,5 +19,4 @@ public class Child {
 
     @OneToMany(mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Appoinment> appoinments = new HashSet<>();
-
 }
