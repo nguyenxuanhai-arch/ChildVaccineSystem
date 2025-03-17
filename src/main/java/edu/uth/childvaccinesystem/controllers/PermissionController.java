@@ -7,7 +7,7 @@ import edu.uth.childvaccinesystem.services.PermissionService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/per")
+@RequestMapping("/api/per")
 public class PermissionController {
     @Autowired
     private PermissionService permissionService;

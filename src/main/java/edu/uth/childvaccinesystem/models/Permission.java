@@ -1,7 +1,13 @@
 package edu.uth.childvaccinesystem.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.HashSet;
+import java.util.Set;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "permission")
 public class Permission {
@@ -16,27 +22,6 @@ public class Permission {
     @Column(name = "permission_name", length = 100)
     private String permissionName;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getPermissionName() {
-        return permissionName;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName;
-    }
+    @ManyToMany(mappedBy = "permissions")
+    private Set<User> user = new HashSet<>();
 }

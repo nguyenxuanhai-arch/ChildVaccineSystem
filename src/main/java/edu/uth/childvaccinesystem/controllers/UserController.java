@@ -8,7 +8,7 @@ import edu.uth.childvaccinesystem.services.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -31,5 +31,11 @@ public class UserController {
     @DeleteMapping("/user")
     public long deleteUser(@RequestBody User user) {
         return userService.DeleteUser(user);
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@RequestParam String username, @RequestParam String password, @RequestParam String role) {
+        userService.registerUser(username, password, role);
+        return "redirect:/login";
     }
 }

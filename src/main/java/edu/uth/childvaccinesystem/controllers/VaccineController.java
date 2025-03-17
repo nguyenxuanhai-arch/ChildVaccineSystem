@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vaccine")
+@RequestMapping("/api/vaccine")
 public class VaccineController {
 
     @Autowired
@@ -18,12 +18,6 @@ public class VaccineController {
     @PostMapping("/vaccine")
     public long createVaccine(@RequestBody Vaccine vaccine) {
         return vaccineService.createVaccine(vaccine);
-    }
-
-    // Read (Lấy thông tin theo ID)
-    @GetMapping("vaccine/{id}")
-    public Vaccine getVaccineById(@PathVariable Long id) {
-        return vaccineService.getVaccineById(id);
     }
 
     // Read (Lấy tất cả vaccine)
