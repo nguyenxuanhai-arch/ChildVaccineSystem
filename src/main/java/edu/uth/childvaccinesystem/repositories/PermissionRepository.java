@@ -8,4 +8,6 @@ import java.util.List;
 @Repository
 public interface PermissionRepository extends JpaRepository<Permission, Long> {
     List<Permission> findAll();
+
+    long findAllById(Long id);
 }

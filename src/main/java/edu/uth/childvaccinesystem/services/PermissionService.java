@@ -38,4 +38,8 @@ public class PermissionService {
         permissionRepository.delete(permission);
         return id;
     }
+
+    public long GetPermissionsById(long id) {
+        return permissionRepository.findAllById(id);
+    }
 }

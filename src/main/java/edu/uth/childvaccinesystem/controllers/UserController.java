@@ -8,7 +8,7 @@ import edu.uth.childvaccinesystem.services.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private UserService userService;
