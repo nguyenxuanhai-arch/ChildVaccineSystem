@@ -1,0 +1,61 @@
+# Help
+
+## Giới thiệu
+
+Hệ thống theo dõi lịch tiêm chủng cho trẻ em giúp quản lý lịch tiêm chủng và cung cấp thông tin về vaccine. Hệ thống này cho phép người dùng đăng ký, đăng nhập, đặt lịch tiêm chủng, xem danh sách vaccine và thông tin giới thiệu về hệ thống.
+
+## Hướng dẫn sử dụng
+
+### Đăng ký người dùng
+
+1. Truy cập trang đăng ký tại `http://localhost:8090/register`.
+2. Điền thông tin cần thiết (Tên đăng nhập, Email, Mật khẩu).
+3. Nhấn nút "Đăng ký" để hoàn tất quá trình đăng ký.
+
+### Đăng nhập người dùng
+
+1. Truy cập trang đăng nhập tại `http://localhost:8090/login`.
+2. Điền tên đăng nhập và mật khẩu.
+3. Nhấn nút "Đăng nhập" để truy cập vào hệ thống.
+
+### Đặt lịch tiêm chủng
+
+1. Đăng nhập vào hệ thống.
+2. Truy cập trang đặt lịch tiêm chủng tại `http://localhost:8090/booking`.
+3. Chọn vaccine từ danh sách và nhấn nút "Đặt lịch" để hoàn tất.
+
+### Xem danh sách vaccine
+
+1. Truy cập trang danh sách vaccine tại `http://localhost:8090/vaccine-list`.
+2. Xem thông tin về các loại vaccine có sẵn.
+
+### Trang giới thiệu
+
+1. Truy cập trang giới thiệu tại `http://localhost:8090/about`.
+2. Xem thông tin giới thiệu về hệ thống.
+
+### Bảng điều khiển cho quản trị viên
+
+1. Đăng nhập với tài khoản quản trị viên.
+2. Truy cập trang bảng điều khiển tại `http://localhost:8090/dashboard`.
+3. Xem thống kê và quản lý hệ thống.
+
+## Cấu hình cơ sở dữ liệu
+
+Cập nhật thông tin kết nối cơ sở dữ liệu trong file `src/main/resources/application.properties`:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/childvaccinesystem
+spring.datasource.username=root
+spring.datasource.password=123456
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+spring.jpa.generate-ddl=true
+spring.jpa.hibernate.ddl-auto=update
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+
+spring.application.name=restapi
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.api-docs.path=/v3/api-docs
+server.port=8090
