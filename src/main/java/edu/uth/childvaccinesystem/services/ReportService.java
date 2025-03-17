@@ -1,4 +1,4 @@
 package edu.uth.childvaccinesystem.services;
 
-public class ReportRepository {
+public class ReportService {
 }
