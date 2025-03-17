@@ -15,7 +15,7 @@ Hệ thống theo dõi lịch tiêm chủng cho trẻ em giúp quản lý lịch
 
 ## Cấu trúc dự án
 
-`src/main/java/edu/uth/childvaccinesystem/config`: Để lưu trữ các cấu hình của ứng dụng, giúp quản lý và tách biệt các thiết lập quan trọng.
+- `src/main/java/edu/uth/childvaccinesystem/config`: Để lưu trữ các cấu hình của ứng dụng, giúp quản lý và tách biệt các thiết lập quan trọng.
 - `src/main/java/edu/uth/childvaccinesystem/controllers`: Chứa các controller xử lý các yêu cầu HTTP.
 - `src/main/java/edu/uth/childvaccinesystem/models`: Chứa các lớp mô hình (entities).
 - `src/main/java/edu/uth/childvaccinesystem/repositories`: Chứa các repository để tương tác với cơ sở dữ liệu.
@@ -70,3 +70,13 @@ mvn spring-boot:run
 Mở dự án Spring Boot của bạn.
 Xác định vị trí lớp chính (Class có chú thích @SpringBootApplication).
 Nhấp vào Run hoặc Debug trong IDE của bạn.
+Đóng góp
+Nếu bạn muốn đóng góp cho dự án, vui lòng tạo pull request hoặc mở issue mới trên GitHub.
+
+Giấy phép
+Dự án này được cấp phép theo giấy phép MIT. Xem file LICENSE để biết thêm chi tiết.
+
+Trợ giúp
+Để biết thêm thông tin chi tiết và hướng dẫn sử dụng, vui lòng xem file HELP.md.
+
+Hãy lưu file này vào dự án của bạn với tên [README.md](http://_vscodecontentref_/1).
