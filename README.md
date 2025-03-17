@@ -15,6 +15,7 @@ Hệ thống theo dõi lịch tiêm chủng cho trẻ em giúp quản lý lịch
 
 ## Cấu trúc dự án
 
+`src/main/java/edu/uth/childvaccinesystem/config`: Để lưu trữ các cấu hình của ứng dụng, giúp quản lý và tách biệt các thiết lập quan trọng.
 - `src/main/java/edu/uth/childvaccinesystem/controllers`: Chứa các controller xử lý các yêu cầu HTTP.
 - `src/main/java/edu/uth/childvaccinesystem/models`: Chứa các lớp mô hình (entities).
 - `src/main/java/edu/uth/childvaccinesystem/repositories`: Chứa các repository để tương tác với cơ sở dữ liệu.
