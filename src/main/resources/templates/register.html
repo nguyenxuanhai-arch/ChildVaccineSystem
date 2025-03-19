@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <th:block th:replace="layout :: content">
+    <th:block th:replace="masterpage/_layout :: content">
         <h2>Đăng ký</h2>
         <form th:action="@{/register}" method="post">
             <input type="text" name="name" placeholder="Họ và tên" required>

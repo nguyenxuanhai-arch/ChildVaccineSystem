@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Page</title>
+    <link rel="stylesheet" href="/path/to/your/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Child Vaccine Schedule Tracking System</h1>
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/schedule">Schedule</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Content will be injected here -->
+        <div th:replace="${content}"></div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Child Vaccine Schedule Tracking System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

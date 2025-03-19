@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Master Page</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="masterpage/_layoutnavbar :: navbar"></div>
+
+<!-- Sidebar -->
+<div th:replace="masterpage/_layoutmenu :: menu"></div>
+
+<!-- Nội dung động -->
+<main layout:fragment="content"></main>
+
+<!-- Footer -->
+<div th:replace="masterpage/_layoutfooter :: footer"></div>
+</body>
+</html>

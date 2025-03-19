@@ -1,23 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="masterpage/_layout">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Content Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Đăng nhập</title>
 </head>
 <body>
-    <header>
-        <h1>Child Vaccine Schedule Tracking System</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Content Section</h2>
-            <p>This is where the main content will go.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 Child Vaccine Schedule Tracking System</p>
-    </footer>
+<main layout:fragment="content">
+    <h2>Đăng nhập</h2>
+    <form th:action="@{/login}" method="post">
+        <input type="text" name="username" placeholder="Tên đăng nhập" required>
+        <input type="password" name="password" placeholder="Mật khẩu" required>
+        <button type="submit">Đăng nhập</button>
+    </form>
+</main>
 </body>
 </html>

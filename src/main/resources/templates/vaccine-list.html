@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <th:block th:replace="layout :: content">
+    <th:block th:replace="masterpage/_layout :: content">
         <h2>Danh sách vaccine</h2>
         <ul>
             <li th:each="vaccine : ${vaccines}" th:text="${vaccine.name}"></li>
