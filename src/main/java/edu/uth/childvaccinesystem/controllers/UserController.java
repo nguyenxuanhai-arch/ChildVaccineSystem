@@ -1,6 +1,5 @@
 package edu.uth.childvaccinesystem.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import edu.uth.childvaccinesystem.models.User;
 import edu.uth.childvaccinesystem.services.UserService;
@@ -8,34 +7,46 @@ import edu.uth.childvaccinesystem.services.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
-    @Autowired
-    private UserService userService;
 
-    @GetMapping("/users")
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @PostMapping("/user")
-    public long addUser(@RequestBody User user) {
-        return userService.CreateUser(user);
+    @PostMapping
+    public User addUser(@RequestParam String username, @RequestParam String password, @RequestParam List<String> permissions) {
+        return userService.registerUser(username, password, permissions);
     }
 
-    @PutMapping("/user/{id}")
-    public long updateUser(@PathVariable Long id,@RequestBody User user) {
-        return userService.UpdateUser(id, user);
+    @PutMapping("/{id}")
+    public User updateUser(
+            @PathVariable Long id,
+            @RequestParam String username,
+            @RequestParam String password,
+            @RequestParam List<String> permissions) {
+        return userService.updateUser(id, username, password, permissions);
     }
 
-    @DeleteMapping("/user")
-    public long deleteUser(@RequestBody User user) {
-        return userService.DeleteUser(user);
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return "User deleted successfully";
     }
 
     @PostMapping("/register")
-    public String registerUser(@RequestParam String username, @RequestParam String password, @RequestParam String role) {
-        userService.registerUser(username, password, role);
-        return "redirect:/login";
+    public String registerUser(
+            @RequestParam String username,
+            @RequestParam String password,
+            @RequestParam List<String> permissions) {
+        userService.registerUser(username, password, permissions);
+        return "User registered successfully";
     }
 }
