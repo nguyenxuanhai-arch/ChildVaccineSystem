@@ -21,23 +21,8 @@ public class HomeController {
         return "register";
     }
 
-    @GetMapping("/booking")
-    public String booking() {
-        return "booking";
-    }
-
-    @GetMapping("/vaccine-list")
-    public String vaccineList() {
-        return "vaccine-list";
-    }
-
     @GetMapping("/about")
     public String about() {
         return "about";
-    }
-
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "dashboard";
     }
 }
