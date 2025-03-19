@@ -9,7 +9,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "users") // Đặt tên bảng theo quy chuẩn SQL
+@Table(name = "user") // Đặt tên bảng theo quy chuẩn SQL
 public class User {
 
     @Id
