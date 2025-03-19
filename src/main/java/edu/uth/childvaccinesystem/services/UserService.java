@@ -2,22 +2,26 @@ package edu.uth.childvaccinesystem.services;
 
 import edu.uth.childvaccinesystem.models.User;
 import edu.uth.childvaccinesystem.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class UserService implements org.springframework.security.core.userdetails.UserDetailsService {
-    @Autowired
-    private UserRepository userRepository;
+    
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    // Sử dụng Constructor Injection thay vì @Autowired
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public long CreateUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // Mã hóa mật khẩu
         return this.userRepository.save(user).getId();
     }
 
@@ -26,7 +30,7 @@ public class UserService implements org.springframework.security.core.userdetail
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         user.setUsername(userDetails.getUsername());
-        user.setPassword(userDetails.getPassword());
+        user.setPassword(passwordEncoder.encode(userDetails.getPassword())); // Mã hóa mật khẩu
 
         return userRepository.save(user).getId();
     }
