@@ -18,5 +18,5 @@ public class Child {
     private String age ;
 
     @OneToMany(mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Appoinment> appoinments = new HashSet<>();
+    private Set<Appointment> appoinments = new HashSet<>();
 }
