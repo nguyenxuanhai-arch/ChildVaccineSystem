@@ -1,54 +1,41 @@
 package edu.uth.childvaccinesystem.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import edu.uth.childvaccinesystem.models.User;
 import edu.uth.childvaccinesystem.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/user")
 public class UserController {
-
-    private final UserService userService;
-
-    // Constructor-based injection (khuyến nghị)
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
 
-    @GetMapping
+    @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        Optional<User> user = userService.getUserById(id);
-        return user.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @PostMapping("/user")
+    public long addUser(@RequestBody User user) {
+        return userService.CreateUser(user);
     }
 
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
-        return ResponseEntity.ok(createdUser);
+    @PutMapping("/user/{id}")
+    public long updateUser(@PathVariable Long id,@RequestBody User user) {
+        return userService.UpdateUser(id, user);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
-        Optional<User> updatedUser = userService.updateUser(id, user);
-        return updatedUser.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @DeleteMapping("/user")
+    public long deleteUser(@RequestBody User user) {
+        return userService.DeleteUser(user);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        boolean isDeleted = userService.deleteUser(id);
-        return isDeleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    @PostMapping("/register")
+    public String registerUser(@RequestParam String username, @RequestParam String password, @RequestParam String role) {
+        userService.registerUser(username, password, role);
+        return "redirect:/login";
     }
 }

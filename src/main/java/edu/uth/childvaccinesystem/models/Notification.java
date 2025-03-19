@@ -1,38 +1,28 @@
 package edu.uth.childvaccinesystem.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-@Setter
-@Getter
-@Entity
-public class Notification {
+import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@Entity
+@Table(name = "notifications")
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "user_id", nullable = false)
+    private Long userId;  // ID người nhận thông báo
+
+    @Column(name = "message", nullable = false, length = 500)
     private String message;
-    private String recipient;
-    private boolean isRead;
 
-    public Notification() {
-    }
+    @Column(name = "sent_at")
+    private LocalDateTime sentAt = LocalDateTime.now();  // Thời gian gửi
 
-    public Notification(String message, String recipient, boolean isRead) {
-        this.message = message;
-        this.recipient = recipient;
-        this.isRead = isRead;
-    }
-
-    public boolean isRead() {
-        return isRead;
-    }
-
-    public void setRead(boolean isRead) {
-        this.isRead = isRead;
-    }
+    @Column(name = "status", nullable = false)
+    private boolean status = false;  // Trạng thái đã gửi hay chưa
 }

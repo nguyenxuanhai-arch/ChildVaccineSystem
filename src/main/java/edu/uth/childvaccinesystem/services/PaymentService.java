@@ -5,11 +5,9 @@ import edu.uth.childvaccinesystem.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PaymentService {
-
     @Autowired
     private PaymentRepository paymentRepository;
 
@@ -17,23 +15,27 @@ public class PaymentService {
         return paymentRepository.findAll();
     }
 
-    public Optional<Payment> getPaymentById(Long id) {
-        return paymentRepository.findById(id);
+    public void savePayment(Payment payment) {
+        payment.setStatus("PENDING"); // Mặc định khi thanh toán đang chờ xử lý
+        paymentRepository.save(payment);
     }
 
-    public Payment savePayment(Payment payment) {
-        return paymentRepository.save(payment);
+    public void updatePaymentStatus(Long id, String status) {
+        Payment payment = paymentRepository.findById(id).orElse(null);
+        if (payment != null) {
+            payment.setStatus(status);
+            paymentRepository.save(payment);
+        }
     }
 
     public void deletePayment(Long id) {
         paymentRepository.deleteById(id);
     }
 
-    public Payment createPayment(Payment payment) {
-        return payment;
-    }
-
-    public Payment updatePayment(Long id, Payment payment) {
-        return payment;
+    public double getTotalRevenue() {
+        return paymentRepository.findAll().stream()
+                .filter(p -> "COMPLETED".equals(p.getStatus()))
+                .mapToDouble(Payment::getAmount)
+                .sum();
     }
 }

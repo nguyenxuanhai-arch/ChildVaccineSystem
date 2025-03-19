@@ -4,52 +4,26 @@ import edu.uth.childvaccinesystem.models.Notification;
 import edu.uth.childvaccinesystem.repositories.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class NotificationService {
 
-    private final NotificationRepository notificationRepository;
-
     @Autowired
-    public NotificationService(NotificationRepository notificationRepository) {
-        this.notificationRepository = notificationRepository;
-    }
+    private NotificationRepository notificationRepository;
 
-    // Lấy tất cả thông báo
-    public List<Notification> getAllNotifications() {
-        return notificationRepository.findAll();
-    }
+    // Gửi thông báo
+    public Notification sendNotification(Long userId, String message) {
+        Notification notification = new Notification();
+        notification.setUserId(userId);
+        notification.setMessage(message);
+        notification.setStatus(true); // Đánh dấu đã gửi
 
-    public Optional<Notification> getNotificationById(Long id) {
-        return notificationRepository.findById(id);
-    }
-
-    public Notification createNotification(Notification notification) {
         return notificationRepository.save(notification);
     }
 
-    public Optional<Notification> updateNotification(Long id, Notification notificationDetails) {
-        return notificationRepository.findById(id).map(notification -> {
-            notification.setMessage(notificationDetails.getMessage());
-            notification.setRecipient(notificationDetails.getRecipient());
-            notification.setRead(notificationDetails.isRead());
-            return Optional.of(notificationRepository.save(notification));
-        }).orElse(Optional.empty());
-    }
-
-    public Optional<Notification> markAsRead(Long id) {
-        return notificationRepository.findById(id).map(notification -> {
-            notification.setRead(true);
-            return notificationRepository.save(notification);
-        });
-    }
-
-    public void deleteNotification(Long id) {
-        if (notificationRepository.existsById(id)) {
-            notificationRepository.deleteById(id);
-        }
+    // Lấy danh sách thông báo của một người dùng
+    public List<Notification> getNotificationsByUser(Long userId) {
+        return notificationRepository.findByUserId(userId);
     }
 }

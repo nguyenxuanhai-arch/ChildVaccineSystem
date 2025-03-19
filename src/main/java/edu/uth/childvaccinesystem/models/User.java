@@ -1,34 +1,40 @@
 package edu.uth.childvaccinesystem.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
 @Entity
+@Table(name = "user")
 public class User {
 
-    // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username;
     private String password;
-    private String email;
-    private String phoneNumber;
+    private String role;
 
     // Constructors
     public User() {
     }
 
-    public User(String username, String password, String email) {
+    public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
-        this.email = email;
+        this.role = role;
     }
-
+    @ManyToMany
+    @JoinTable(
+            name = "user_permission",
+            joinColumns = @JoinColumn(name = "user"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    private Set<Permission> permissions = new HashSet<>();
 }

@@ -2,41 +2,47 @@ package edu.uth.childvaccinesystem.services;
 
 import edu.uth.childvaccinesystem.models.Child;
 import edu.uth.childvaccinesystem.repositories.ChildRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ChildService {
-    private final ChildRepository childRepository;
-    public ChildService(ChildRepository childRepository) { this.childRepository = childRepository; }
 
-    public List<Child> getAllChildren() { return childRepository.findAll(); }
+    @Autowired
+    private ChildRepository childRepository;
+
+    public List<Child> getAllChildren() {
+        return childRepository.findAll();
+    }
 
     public Optional<Child> getChildById(Long id) {
         return childRepository.findById(id);
     }
 
-    public Child createChild(Child child) {
-        return childRepository.save(child);
+    public long saveChild(Child child) {
+        return childRepository.save(child).getId();
     }
 
-    public Child updateChild(Long id, Child childDetails) {
-        Optional<Child> childOptional = childRepository.findById(id);
-        if (childOptional.isPresent()) {
-            Child child = childOptional.get();
-            child.setUsername(childDetails.getUsername());
-            child.setEmail(childDetails.getEmail());
-            child.setPassword(childDetails.getPassword());
-            return childRepository.save(child);
+    public long updateChild(Long id, Child childDetails) {
+        Optional<Child> optionalChild = childRepository.findById(id);
+        if (optionalChild.isPresent()) {
+            Child child = optionalChild.get();
+            child.setName(childDetails.getName());
+            child.setAge(childDetails.getAge());
+            return childRepository.save(child).getId();
         } else {
-            throw new RuntimeException("Child not found with id " + id);
+            throw new RuntimeException("Child not found");
         }
     }
 
-    public void deleteChild(Long id) {
-        childRepository.deleteById(id);
+    public long deleteChild(Long id) {
+        if (childRepository.existsById(id)) {
+            childRepository.deleteById(id);
+            return id;
+        } else {
+            throw new RuntimeException("Child not found");
+        }
     }
 }

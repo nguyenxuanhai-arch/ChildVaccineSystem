@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/children")
+@RequestMapping("/api/child")
 public class ChildController {
 
     @Autowired
@@ -21,27 +20,35 @@ public class ChildController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Child> getChildById(@PathVariable Long id) {
-        return childService.getChildById(id);
+    public ResponseEntity<Child> getChildById(@PathVariable Long id) {
+        return childService.getChildById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Child createChild(@RequestBody Child child) {
-        return childService.createChild(child);
+    public ResponseEntity<Long> createChild(@RequestBody Child child) {
+        long id = childService.saveChild(child);
+        return ResponseEntity.ok(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Child> updateChild(@PathVariable Long id, @RequestBody Child childDetails) {
-        Child updatedChild = childService.updateChild(id, childDetails);
-        if (updatedChild != null) {
-            return ResponseEntity.ok(updatedChild);
-        } else {
+    public ResponseEntity<Long> updateChild(@PathVariable Long id, @RequestBody Child childDetails) {
+        try {
+            long updatedId = childService.updateChild(id, childDetails);
+            return ResponseEntity.ok(updatedId);
+        } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteChild(@PathVariable Long id) {
-        childService.deleteChild(id);
+    public ResponseEntity<Long> deleteChild(@PathVariable Long id) {
+        try {
+            long deletedId = childService.deleteChild(id);
+            return ResponseEntity.ok(deletedId);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

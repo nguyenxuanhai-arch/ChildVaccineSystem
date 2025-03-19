@@ -1,53 +1,22 @@
 package edu.uth.childvaccinesystem.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
-@Entity
-public class Child {
+import java.util.HashSet;
+import java.util.Set;
 
-    // Getters and Setters
+@Entity
+@Getter
+@Setter
+public class Child {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy  = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String dateOfBirth;
+    private String age ;
 
-    // Default constructor
-    public Child() {
-    }
-
-    // Parameterized constructor
-    public Child(String name, String dateOfBirth) {
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getUsername() {
-        return "";
-    }
-
-    public String getEmail() {
-        return "";
-    }
-
-    public String getPassword() {
-        return "";
-    }
-
-    public void setUsername(String username) {
-    }
-
-    public void setEmail(String email) {
-    }
-
-    public void setPassword(String password) {
-
-    }
+    @OneToMany(mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Appointment> appoinments = new HashSet<>();
 }
